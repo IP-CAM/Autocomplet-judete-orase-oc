@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<name><![CDATA[<font color="#4285F4"><b>Autocomplete City, County, Zip Romania OC23</b></font>]]></name>
+	<code>autocomplete-city-county-zip-romania-checkout</code>
+	<version>0.1</version>
+	<author>websiteup</author>
+	<link>websiteup</link>
+
+	<file path="catalog/view/theme/*/template/common/header.tpl">
+		<operation>
+			<search><![CDATA[
+				</head>
+			]]></search>
+			<add position="before"><![CDATA[
+				<link href="catalog/view/theme/saasfashion/stylesheet/autocomplete-zip/select2.min.css" rel="stylesheet" />
+				<script src="catalog/view/javascript/autocomplete-zip/select2.min.js"></script>
+				<script src="catalog/view/javascript/autocomplete-zip/lodash.min.js"></script>
+				<script src="catalog/view/javascript/autocomplete-zip/adress_form.js"></script>
+
+				<script>
+					var url = 'https://gist.githubusercontent.com/danichim/12800cbaef8bb0556ab02b7a9332e956/raw/341efef2da8248ca3bc2201d0f9a77d349e1d5d1/locality.json';
+					function getJsonLocalityHeader () {
+							$.ajax({
+								url: url,
+								dataType: 'json',
+								success: function(data) {
+									window.bulkData = data;
+								},
+								statusCode: {
+									404: function() {
+										alert('There was a problem with the server.  Try again soon!');
+									}
+								}
+							});
+					}
+					getJsonLocalityHeader()
+				</script>
+			]]></add>
+		</operation>
+	</file>
+
+	<file path="catalog/view/theme/saasfashion/template/quickcheckout/payment_address.tpl">
+		<operation>
+			<search index="1"><![CDATA[
+				</script>
+			]]></search>
+			<add position="after"><![CDATA[
+				<script src="catalog/view/javascript/autocomplete-zip/adress_form.js"></script>
+			]]></add>
+		</operation>
+	</file>
+
+</modification>
